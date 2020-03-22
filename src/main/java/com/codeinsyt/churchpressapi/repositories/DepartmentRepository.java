@@ -11,9 +11,9 @@ import java.util.List;
 public interface DepartmentRepository  extends JpaRepository<Department, Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE Department d SET d.status = ?2 WHERE s.id = ?1")
+    @Query("UPDATE Department d SET d.status = ?2 WHERE d.id = ?1")
     @Transactional
-    int UpdateStudentStatus(Long departmentId, String status);
+    int UpdateDepartmentStatus(Long departmentId, String status);
 
     List<Department> findAllByStatusOrderByIdAsc(String status);
 }
