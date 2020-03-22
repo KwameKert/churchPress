@@ -3,9 +3,11 @@ package com.codeinsyt.churchpressapi.services.impl;
 import com.codeinsyt.churchpressapi.models.Sermon;
 import com.codeinsyt.churchpressapi.services.interfaces.SermonService;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+@Service
 public class SermonServiceImpl implements SermonService {
 
 
