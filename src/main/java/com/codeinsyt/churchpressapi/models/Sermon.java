@@ -1,9 +1,9 @@
 package com.codeinsyt.churchpressapi.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "app_sermon")
 public class Sermon {
 
     @Id
