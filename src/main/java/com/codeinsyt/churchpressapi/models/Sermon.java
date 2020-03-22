@@ -10,6 +10,7 @@ public class Sermon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    @Lob
     private String description;
     private String url;
     private String category;
