@@ -20,6 +20,7 @@ public class User {
     private String role;
     private Status status;
     @CreationTimestamp
+    @Column(updatable = false)
     private Date createdAt;
     @UpdateTimestamp
     private Date updatedAt;

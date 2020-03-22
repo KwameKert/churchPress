@@ -1,6 +1,10 @@
 package com.codeinsyt.churchpressapi.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "app_sermons")
@@ -17,9 +21,33 @@ public class Sermon {
     private String author;
     private Status status;
 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Date createdAt;
+    @UpdateTimestamp
+    private Date updatedAt;
+
+
+
     public Sermon() {
     }
 
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public Long getId() {
         return id;
@@ -77,7 +105,6 @@ public class Sermon {
         this.status = status;
     }
 
-
     @Override
     public String toString() {
         return "Sermon{" +
@@ -88,6 +115,8 @@ public class Sermon {
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
                 ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 

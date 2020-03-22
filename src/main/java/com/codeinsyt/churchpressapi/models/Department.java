@@ -1,6 +1,10 @@
 package com.codeinsyt.churchpressapi.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 enum Status {
@@ -17,6 +21,12 @@ public class Department {
     @Lob
     private String description;
     private Status status;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Date createdAt;
+    @UpdateTimestamp
+    private Date updatedAt;
+
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Leader> leaders;
@@ -24,6 +34,21 @@ public class Department {
     public Department() {
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public Long getId() {
         return id;
@@ -72,6 +97,8 @@ public class Department {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 ", leaders=" + leaders +
                 '}';
     }
