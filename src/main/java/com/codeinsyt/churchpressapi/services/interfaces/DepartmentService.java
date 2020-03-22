@@ -1,4 +1,4 @@
-package com.codeinsyt.churchpressapi.services.interfaces.impl;
+package com.codeinsyt.churchpressapi.services.interfaces;
 
 public interface DepartmentService {
 }
