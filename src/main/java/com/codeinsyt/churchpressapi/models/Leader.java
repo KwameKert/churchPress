@@ -1,9 +1,13 @@
 package com.codeinsyt.churchpressapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
+
+
 @Entity
-@Table(name = "app_leader")
+@Table(name = "app_leaders")
 public class Leader {
 
     @Id
@@ -12,9 +16,11 @@ public class Leader {
     private String name;
     @Lob
     private String description;
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable= false)
+    @JsonIgnore
     private Department department;
 
     public Leader() {
@@ -53,6 +59,13 @@ public class Leader {
         this.department = department;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -60,6 +73,7 @@ public class Leader {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", status=" + status +
                 ", department=" + department +
                 '}';
     }

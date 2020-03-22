@@ -3,7 +3,7 @@ package com.codeinsyt.churchpressapi.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_sermon")
+@Table(name = "app_sermons")
 public class Sermon {
 
     @Id
@@ -15,6 +15,7 @@ public class Sermon {
     private String url;
     private String category;
     private String author;
+    private Status status;
 
     public Sermon() {
     }
@@ -68,6 +69,15 @@ public class Sermon {
         this.author = author;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+
     @Override
     public String toString() {
         return "Sermon{" +
@@ -77,6 +87,9 @@ public class Sermon {
                 ", url='" + url + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
+                ", status=" + status +
                 '}';
     }
+
+
 }

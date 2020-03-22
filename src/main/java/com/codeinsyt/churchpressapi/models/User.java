@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name ="app_user")
+@Table(name ="app_users")
 public class User {
 
     @Id
@@ -18,6 +18,7 @@ public class User {
     private String userName;
     private String password;
     private String role;
+    private Status status;
     @CreationTimestamp
     private Date createdAt;
     @UpdateTimestamp
@@ -92,6 +93,15 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -101,6 +111,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
+                ", status=" + status +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
