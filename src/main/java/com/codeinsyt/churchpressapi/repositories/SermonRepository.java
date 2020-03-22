@@ -13,7 +13,7 @@ public interface SermonRepository extends JpaRepository<SermonRepository, Long> 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Sermon s SET s.status = ?2 WHERE s.id = ?1")
     @Transactional
-    int UpdateSermonStatus(Long studentId, String status);
+    int UpdateSermonStatus(Long sermonId, String status);
 
     List<Sermon> findAllByStatusOrderByIdAsc(String status);
 }
