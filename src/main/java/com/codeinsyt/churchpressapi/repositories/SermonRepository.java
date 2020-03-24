@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface SermonRepository extends JpaRepository<SermonRepository, Long> {
+public interface SermonRepository extends JpaRepository<Sermon, Long> {
 
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Sermon s SET s.status = ?2 WHERE s.id = ?1")
