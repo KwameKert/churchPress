@@ -17,7 +17,7 @@ public interface UserRepository  extends JpaRepository<User, Long> {
 
     List<User> findAllByStatOrderByIdAsc(String status);
 
-    User findFirstByUserName(String username);
+    User findByUserName(String username);
 
 
 }

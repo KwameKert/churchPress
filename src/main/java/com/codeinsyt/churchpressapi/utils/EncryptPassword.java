@@ -10,4 +10,7 @@ public class EncryptPassword {
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
     }
+
+    //hashing same passwords differently..
+    //investigate that well
 }
