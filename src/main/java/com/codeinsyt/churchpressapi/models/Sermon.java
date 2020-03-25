@@ -19,7 +19,7 @@ public class Sermon {
     private String url;
     private String category;
     private String author;
-    private String status;
+    private String stat;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -97,12 +97,12 @@ public class Sermon {
         this.author = author;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStat() {
+        return stat;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class Sermon {
                 ", url='" + url + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
-                ", status=" + status +
+                ", status=" + stat +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

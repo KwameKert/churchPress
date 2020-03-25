@@ -18,7 +18,7 @@ public class Leader {
     private String name;
     @Lob
     private String description;
-    private String status;
+    private String stat;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable= false)
@@ -66,12 +66,12 @@ public class Leader {
         this.department = department;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStat() {
+        return stat;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 
     public Date getCreatedAt() {
@@ -96,7 +96,7 @@ public class Leader {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", status=" + status +
+                ", status=" + stat +
                 ", department=" + department +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

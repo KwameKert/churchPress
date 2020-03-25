@@ -18,7 +18,7 @@ public class Department {
     private String name;
     @Lob
     private String description;
-    private String status;
+    private String stat;
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -72,12 +72,13 @@ public class Department {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
+
+    public String getStat() {
+        return stat;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 
     public List<Leader> getLeaders() {
@@ -94,7 +95,7 @@ public class Department {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", status=" + status +
+                ", status=" + stat +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", leaders=" + leaders +
