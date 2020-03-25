@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HashMap<String, Object> createUser(User user){
-
+        System.out.println(user);
 
         try {
             User newUser = userRepository.save(user);

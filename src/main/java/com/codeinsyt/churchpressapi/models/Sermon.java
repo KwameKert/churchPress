@@ -19,8 +19,7 @@ public class Sermon {
     private String url;
     private String category;
     private String author;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -98,11 +97,11 @@ public class Sermon {
         this.author = author;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

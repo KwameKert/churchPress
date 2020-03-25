@@ -7,9 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-enum Status {
-    ACTIVE,INACTIVE
-}
+
 @Entity
 @Table(name ="app_departments")
 public class Department {
@@ -20,8 +18,7 @@ public class Department {
     private String name;
     @Lob
     private String description;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -75,11 +72,11 @@ public class Department {
         this.description = description;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

@@ -19,8 +19,7 @@ public class User {
     private String userName;
     private String password;
     private String role;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -97,11 +96,11 @@ public class User {
     }
 
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

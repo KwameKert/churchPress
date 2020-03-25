@@ -18,8 +18,7 @@ public class Leader {
     private String name;
     @Lob
     private String description;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable= false)
@@ -67,11 +66,11 @@ public class Leader {
         this.department = department;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
