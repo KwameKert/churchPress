@@ -103,6 +103,7 @@ public class User {
         this.stat = stat;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -112,7 +113,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", stat=" + stat +
+                ", stat='" + stat + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

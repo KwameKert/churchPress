@@ -114,11 +114,9 @@ public class Sermon {
                 ", url='" + url + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
-                ", status=" + stat +
+                ", stat='" + stat + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
-
-
 }

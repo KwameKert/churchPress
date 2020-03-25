@@ -96,7 +96,7 @@ public class Leader {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", status=" + stat +
+                ", stat='" + stat + '\'' +
                 ", department=" + department +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

@@ -11,9 +11,9 @@ import java.util.List;
 public interface SermonRepository extends JpaRepository<Sermon, Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE Sermon s SET s.status = ?2 WHERE s.id = ?1")
+    @Query("UPDATE Sermon s SET s.stat = ?2 WHERE s.id = ?1")
     @Transactional
-    int UpdateSermonStatus(Long sermonId, String status);
+    int UpdateSermonStat(Long sermonId, String status);
 
-    List<Sermon> findAllByStatusOrderByIdAsc(String status);
+    List<Sermon> findAllByStatOrderByIdAsc(String status);
 }

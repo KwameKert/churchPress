@@ -95,7 +95,7 @@ public class Department {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", status=" + stat +
+                ", stat='" + stat + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", leaders=" + leaders +

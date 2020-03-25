@@ -11,9 +11,9 @@ import java.util.List;
 public interface LeaderRepository extends JpaRepository<Leader, Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE Leader l SET l.status = ?2 WHERE l.id = ?1")
+    @Query("UPDATE Leader l SET l.stat = ?2 WHERE l.id = ?1")
     @Transactional
-    int UpdateLeaderStatus(Long leaderId, String status);
+    int UpdateLeaderStat(Long leaderId, String status);
 
-    List<Leader> findAllByStatusOrderByIdAsc(String status);
+    List<Leader> findAllByStatOrderByIdAsc(String status);
 }
