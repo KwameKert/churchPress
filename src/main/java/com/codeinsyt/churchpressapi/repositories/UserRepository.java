@@ -11,11 +11,11 @@ import java.util.List;
 public interface UserRepository  extends JpaRepository<User, Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE User u SET u.status = ?2 WHERE u.id = ?1")
+    @Query("UPDATE User u SET u.stat = ?2 WHERE u.id = ?1")
     @Transactional
-    int UpdateUserStatus(Long userId, String status);
+    int UpdateUserStat(Long userId, String status);
 
-    List<User> findAllByStatusOrderByIdAsc(String status);
+    List<User> findAllByStatOrderByIdAsc(String status);
 
     User findFirstByUserName(String username);
 

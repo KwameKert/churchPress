@@ -19,7 +19,7 @@ public class User {
     private String userName;
     private String password;
     private String role;
-    private String status;
+    private String stat;
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -95,13 +95,12 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-
-    public String getStatus() {
-        return status;
+    public String getStat() {
+        return stat;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 
     @Override
@@ -113,7 +112,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", status=" + status +
+                ", stat=" + stat +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

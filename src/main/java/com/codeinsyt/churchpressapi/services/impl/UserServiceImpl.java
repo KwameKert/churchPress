@@ -72,11 +72,9 @@ public class UserServiceImpl implements UserService {
             if(!userFound.isPresent()){
                 return responseAPI(Collections.EMPTY_LIST,"No Users found",HttpStatus.NO_CONTENT);
             }
-            User oldUser = userFound.get();
-            oldUser.setRole(user.getRole());
-            oldUser.setStatus(user.getStatus());
 
-            User updatedUser  = userRepository.save(oldUser);
+
+            User updatedUser  = userRepository.save(user);
             return responseAPI(updatedUser,"User updated",HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
@@ -93,7 +91,7 @@ public class UserServiceImpl implements UserService {
             if(!userFound.isPresent()){
                 return responseAPI(Collections.EMPTY_LIST,"No Users found",HttpStatus.NO_CONTENT);
             }
-            userRepository.UpdateUserStatus(id,"inactive");
+            userRepository.UpdateUserStat(id,"inactive");
 
             return responseAPI(userFound,"User updated",HttpStatus.OK);
         }catch(Exception e){
