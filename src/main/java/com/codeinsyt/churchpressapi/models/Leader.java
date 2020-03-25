@@ -18,6 +18,7 @@ public class Leader {
     private String name;
     @Lob
     private String description;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -1,23 +1,22 @@
 package com.codeinsyt.churchpressapi.services.impl;
 
 import com.codeinsyt.churchpressapi.repositories.UserRepository;
-import com.codeinsyt.churchpressapi.services.interfaces.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthService implements UserDetailsService {
 
     public UserRepository userRepository;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

@@ -19,6 +19,7 @@ public class Sermon {
     private String url;
     private String category;
     private String author;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @CreationTimestamp

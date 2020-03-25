@@ -37,15 +37,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public HashMap<String, Object> createUser(User user){
 
-        HashMap<String, Object> responseData = new HashMap<>();
+
         try {
             User newUser = userRepository.save(user);
-            responseAPI(newUser,"User added succesfully",HttpStatus.OK);
+            return responseAPI(newUser,"User added succesfully",HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
-            responseAPI(null, e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+          return  responseAPI(null, e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
-        return responseData;
     }
 
 
@@ -56,15 +55,14 @@ public class UserServiceImpl implements UserService {
         try {
             List<User> allUsers = userRepository.findAll();
             if(allUsers.isEmpty()){
-                responseAPI(Collections.EMPTY_LIST,"No Users found",HttpStatus.NO_CONTENT);
-                return responseData;
+             return   responseAPI(Collections.EMPTY_LIST,"No Users found",HttpStatus.NO_CONTENT);
+
             }
-            responseAPI(allUsers,"Listing all users",HttpStatus.OK);
+           return responseAPI(allUsers,"Listing all users",HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
-            responseAPI(null, e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+           return responseAPI(null, e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
-        return responseData;
     }
 
     @Override

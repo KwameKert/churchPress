@@ -1,7 +1,7 @@
 package com.codeinsyt.churchpressapi;
 
 
-import com.codeinsyt.churchpressapi.services.interfaces.AuthService;
+import com.codeinsyt.churchpressapi.services.impl.AuthService;
 import com.codeinsyt.churchpressapi.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

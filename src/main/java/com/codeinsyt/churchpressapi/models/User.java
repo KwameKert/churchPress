@@ -1,5 +1,6 @@
 package com.codeinsyt.churchpressapi.models;
 
+import com.codeinsyt.churchpressapi.utils.EncryptPassword;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,6 +19,7 @@ public class User {
     private String userName;
     private String password;
     private String role;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @CreationTimestamp
     @Column(updatable = false)
@@ -67,7 +69,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = EncryptPassword.hashPassword(password);
     }
 
     public String getRole() {

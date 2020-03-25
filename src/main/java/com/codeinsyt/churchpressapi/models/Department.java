@@ -20,6 +20,7 @@ public class Department {
     private String name;
     @Lob
     private String description;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @CreationTimestamp
     @Column(updatable = false)
