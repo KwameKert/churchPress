@@ -128,6 +128,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HashMap<String, Object> getUser(Long id) {
-        return null;
+        try {
+            Optional<User> optionalUser = userRepository.findById(id);
+            if (!optionalUser.isPresent()) {
+                return responseAPI(Collections.EMPTY_LIST,"No Users found",HttpStatus.NO_CONTENT);
+            }
+            return responseAPI(optionalUser,"User found",HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null, e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+
+        }
     }
 }

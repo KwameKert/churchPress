@@ -39,12 +39,21 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<?> getUser(@PathVariable("id") long id){
-        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") long id){
-        return new ResponseEntity<>(userService.deleteUser(id),HttpStatus.OK);
+    public ResponseEntity<?> softDeleteUser(@PathVariable("id") long id){
+        return new ResponseEntity<>(userService.softDeleteUser(id),HttpStatus.OK);
     }
+
+    @DeleteMapping("hard/{id}")
+    public ResponseEntity<?> hardDeleteUser(@PathVariable("id") long id){
+        return new ResponseEntity<>(userService.hardDeleteUser(id),HttpStatus.OK);
+    }
+
+
+
+
 }
