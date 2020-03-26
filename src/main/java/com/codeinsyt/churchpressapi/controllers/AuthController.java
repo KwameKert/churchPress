@@ -3,9 +3,12 @@ package com.codeinsyt.churchpressapi.controllers;
 
 import com.codeinsyt.churchpressapi.models.AuthenticationRequest;
 import com.codeinsyt.churchpressapi.models.AuthenticationResponse;
+import com.codeinsyt.churchpressapi.models.User;
 import com.codeinsyt.churchpressapi.services.impl.AuthService;
+import com.codeinsyt.churchpressapi.services.interfaces.UserService;
 import com.codeinsyt.churchpressapi.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -26,25 +31,46 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    private UserService userService;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
-        System.out.println(authenticationRequest);
+        HashMap<String, Object> responseData = new HashMap<>();
         try{
-           authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
+           if(authService.isUser(authenticationRequest) != null){
+               responseData.put("user",authService.isUser(authenticationRequest));
+               responseData.put("message","User logged in");
+               responseData.put("jwt",getJwt(authenticationRequest.getUserName(),authenticationRequest.getPassword()));
+
+           }
+
+            return new ResponseEntity<>(responseData, HttpStatus.OK);
 
         }catch( BadCredentialsException e){
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = authService.loadUserByUsername(authenticationRequest.getUserName());
 
+
+
+    }
+
+
+    String getJwt(String userName, String password)throws Exception{
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
+
+        }catch( BadCredentialsException e){
+            throw new Exception("Incorrect username or password", e);
+        }
+
+        final UserDetails userDetails = authService.loadUserByUsername(userName);
+        System.out.println(userDetails);
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
-
+        return jwt;
     }
 
 }

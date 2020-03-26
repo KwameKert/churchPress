@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository  extends JpaRepository<User, Long> {
 
@@ -16,7 +17,7 @@ public interface UserRepository  extends JpaRepository<User, Long> {
     int UpdateUserStat(Long userId, String status);
 
     List<User> findAllByStatOrderByIdAsc(String status);
-
+    Optional<User> findFirstByUserNameAndPassword(String userName, String password);
     User findByUserName(String username);
 
 

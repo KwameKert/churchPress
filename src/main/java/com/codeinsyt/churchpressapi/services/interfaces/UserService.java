@@ -18,4 +18,6 @@ public interface UserService {
     HashMap<String, Object> listUsers();
 
     HashMap<String, Object> getUser(Long id);
+    User getUserByUserName(String username);
+
 }

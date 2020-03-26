@@ -136,4 +136,20 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
+    @Override
+    public User getUserByUserName(String username) {
+        try {
+            User optionalUser = userRepository.findByUserName(username);
+            System.out.println(optionalUser);
+            if (optionalUser == null) {
+                return null;
+            }
+            return optionalUser;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+
+        }
+    }
 }
