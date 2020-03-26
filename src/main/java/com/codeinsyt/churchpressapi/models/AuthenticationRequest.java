@@ -2,6 +2,9 @@ package com.codeinsyt.churchpressapi.models;
 
 import com.codeinsyt.churchpressapi.utils.EncryptPassword;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+
 public class AuthenticationRequest {
 
     private String userName;
@@ -24,7 +27,7 @@ public class AuthenticationRequest {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)  {
         this.password = EncryptPassword.hashPassword(password);
     }
 
