@@ -44,10 +44,14 @@ public class AuthController {
                responseData.put("user",authService.isUser(authenticationRequest));
                responseData.put("message","User logged in");
                responseData.put("jwt",getJwt(authenticationRequest.getUserName(),authenticationRequest.getPassword()));
+               return new ResponseEntity<>(responseData, HttpStatus.OK);
 
            }
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+           responseData.put("data",null);
+           responseData.put("message","Invalid Credentials");
+           responseData.put("status",HttpStatus.EXPECTATION_FAILED);
+           return new ResponseEntity<>(responseData,HttpStatus.EXPECTATION_FAILED);
 
         }catch( BadCredentialsException e){
             throw new Exception("Incorrect username or password", e);
