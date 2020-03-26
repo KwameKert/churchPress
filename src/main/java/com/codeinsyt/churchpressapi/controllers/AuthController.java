@@ -33,19 +33,17 @@ public class AuthController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
         System.out.println(authenticationRequest);
         try{
-           // authService.checkCredentials()
            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
 
         }catch( BadCredentialsException e){
             throw new Exception("Incorrect username or password", e);
         }
-        System.out.println("Passed the try");
+
         final UserDetails userDetails = authService.loadUserByUsername(authenticationRequest.getUserName());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
-//9351b6661730af2a8977f015daa60d3c
 
     }
 

@@ -24,9 +24,8 @@ public class AuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException{
         try{
             com.codeinsyt.churchpressapi.models.User userFound = userRepository.findByUserName(username);
-            System.out.println("Im in the loaduser");
-            return new User("kwamekert","$2a$10$JQBKiSkGWhhSKTbi1qCpMO8/i0hjwGd9vuc4uy7zGWzEINxNu78V.",new ArrayList<>());
-           // return new User(userFound.getUserName(), userFound.getPassword(),new ArrayList<>());
+
+            return new User(userFound.getUserName(), userFound.getPassword(),new ArrayList<>());
         }catch(Exception e){
             System.out.println("Exception here");
             throw new UsernameNotFoundException("user not found");
