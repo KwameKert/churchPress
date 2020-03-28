@@ -20,6 +20,7 @@ public class Sermon {
     private String category;
     private String speaker;
     private String stat;
+    private boolean isLive;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -28,6 +29,21 @@ public class Sermon {
     private Date updatedAt;
 
 
+    public String getSpeaker() {
+        return speaker;
+    }
+
+    public void setSpeaker(String speaker) {
+        this.speaker = speaker;
+    }
+
+    public boolean isLive() {
+        return isLive;
+    }
+
+    public void setLive(boolean live) {
+        isLive = live;
+    }
 
     public Sermon() {
     }
@@ -89,13 +105,7 @@ public class Sermon {
         this.category = category;
     }
 
-    public String getAuthor() {
-        return speaker;
-    }
 
-    public void setAuthor(String speaker) {
-        this.speaker = speaker;
-    }
 
     public String getStat() {
         return stat;
@@ -104,6 +114,7 @@ public class Sermon {
     public void setStat(String stat) {
         this.stat = stat;
     }
+
 
     @Override
     public String toString() {
@@ -115,6 +126,7 @@ public class Sermon {
                 ", category='" + category + '\'' +
                 ", speaker='" + speaker + '\'' +
                 ", stat='" + stat + '\'' +
+                ", isLive=" + isLive +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
