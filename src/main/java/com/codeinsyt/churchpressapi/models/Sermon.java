@@ -18,7 +18,7 @@ public class Sermon {
     private String description;
     private String url;
     private String category;
-    private String author;
+    private String speaker;
     private String stat;
 
     @CreationTimestamp
@@ -90,11 +90,11 @@ public class Sermon {
     }
 
     public String getAuthor() {
-        return author;
+        return speaker;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor(String speaker) {
+        this.speaker = speaker;
     }
 
     public String getStat() {
@@ -113,7 +113,7 @@ public class Sermon {
                 ", description='" + description + '\'' +
                 ", url='" + url + '\'' +
                 ", category='" + category + '\'' +
-                ", author='" + author + '\'' +
+                ", speaker='" + speaker + '\'' +
                 ", stat='" + stat + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
