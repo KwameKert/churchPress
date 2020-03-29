@@ -5,15 +5,12 @@ import com.codeinsyt.churchpressapi.services.interfaces.SermonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/sermon/")
+@RequestMapping("api/v1/sermon/")
 public class SermonController {
 
     private SermonService sermonService;
@@ -24,7 +21,13 @@ public class SermonController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addSermon(@Valid @RequestBody Sermon sermon){
+    public ResponseEntity<?> addSermon(@RequestBody Sermon sermon){
+        System.out.println("Hello here");
         return new ResponseEntity<>(this.sermonService.createSermon(sermon), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listSermons(){
+        return new ResponseEntity<>(this.sermonService.listSermons(), HttpStatus.OK);
     }
 }

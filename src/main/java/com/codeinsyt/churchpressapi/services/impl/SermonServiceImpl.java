@@ -1,15 +1,25 @@
 package com.codeinsyt.churchpressapi.services.impl;
 
 import com.codeinsyt.churchpressapi.models.Sermon;
+import com.codeinsyt.churchpressapi.repositories.SermonRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.SermonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class SermonServiceImpl implements SermonService {
 
+    private SermonRepository sermonRepository;
+
+
+    @Autowired
+    public SermonServiceImpl(SermonRepository sermonRepository) {
+        this.sermonRepository = sermonRepository;
+    }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
         HashMap<String, Object> responseData = new HashMap<>();
@@ -22,7 +32,16 @@ public class SermonServiceImpl implements SermonService {
 
     @Override
     public HashMap<String, Object> createSermon(Sermon sermon) {
-        return null;
+        try{
+            Sermon newSermon = this.sermonRepository.save(sermon);
+            return responseAPI(newSermon,"Sermon saved", HttpStatus.OK);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
+
     }
 
     @Override
@@ -42,7 +61,16 @@ public class SermonServiceImpl implements SermonService {
 
     @Override
     public HashMap<String, Object> listSermons() {
-        return null;
+        try{
+            List<Sermon> sermons = this.sermonRepository.findAll();
+            if(sermons.isEmpty()){
+                return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
+            }
+            return responseAPI(sermons,"Sermons",HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
