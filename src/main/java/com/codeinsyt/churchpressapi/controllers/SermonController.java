@@ -22,7 +22,6 @@ public class SermonController {
 
     @PostMapping
     public ResponseEntity<?> addSermon(@RequestBody Sermon sermon){
-        System.out.println("Hello here");
         return new ResponseEntity<>(this.sermonService.createSermon(sermon), HttpStatus.OK);
     }
 
