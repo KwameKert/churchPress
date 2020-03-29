@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SermonServiceImpl implements SermonService {
@@ -44,6 +45,20 @@ public class SermonServiceImpl implements SermonService {
 
     }
 
+    public boolean sermonExists(Long id){
+        try{
+            Optional<Sermon> foundSermon = this.sermonRepository.findById(id);
+            if(foundSermon.isPresent()){
+                return true;
+            }
+            return false;
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @Override
     public HashMap<String, Object> updateSermon(Sermon sermon) {
         return null;
@@ -51,7 +66,8 @@ public class SermonServiceImpl implements SermonService {
 
     @Override
     public HashMap<String, Object> softDeleteSermon(Long id) {
-        return null;
+
+
     }
 
     @Override

@@ -29,4 +29,10 @@ public class SermonController {
     public ResponseEntity<?> listSermons(){
         return new ResponseEntity<>(this.sermonService.listSermons(), HttpStatus.OK);
     }
+
+    @DeleteMapping("{id")
+    public ResponseEntity<?> deleteSermon(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.sermonService.softDeleteSermon(id),HttpStatus.OK);
+
+    }
 }
