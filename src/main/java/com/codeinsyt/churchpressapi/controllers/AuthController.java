@@ -72,7 +72,7 @@ public class AuthController {
         }
 
         final UserDetails userDetails = authService.loadUserByUsername(userName);
-        System.out.println(userDetails);
+
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return jwt;
     }

@@ -40,15 +40,6 @@ public class AuthService implements UserDetailsService {
         try {
             Optional<com.codeinsyt.churchpressapi.models.User> theUser = userRepository.findFirstByUserNameAndPassword(authenticationRequest.getUserName(),authenticationRequest.getPassword());
 
-//            if(!theUser.isPresent()){
-//                responseData.put("data", Collections.EMPTY_LIST);
-//                response Data.put("message","Invalid Credentials");
-//                responseData.put("status", HttpStatus.NO_CONTENT.value());
-//                return responseData;
-//            }
-//            responseData.put("data",theUser);
-//            responseData.put("message","User is authenticated");
-//            responseData.put("status", HttpStatus.OK.value());
             return theUser.get();
         }catch(Exception e){
 

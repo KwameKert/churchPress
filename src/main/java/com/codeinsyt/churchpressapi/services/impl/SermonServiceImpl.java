@@ -67,6 +67,16 @@ public class SermonServiceImpl implements SermonService {
     @Override
     public HashMap<String, Object> softDeleteSermon(Long id) {
 
+            try{
+                if(sermonExists(id)){
+                    this.sermonRepository.UpdateSermonStat(id, "inactive");
+                    return this.listSermons();
+                }
+               return responseAPI(null,"Sermon doesnt exist", HttpStatus.NO_CONTENT);
+            }catch(Exception e){
+                e.printStackTrace();
+                return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+            }
 
     }
 
