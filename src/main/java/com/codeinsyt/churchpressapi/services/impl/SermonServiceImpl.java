@@ -61,7 +61,18 @@ public class SermonServiceImpl implements SermonService {
 
     @Override
     public HashMap<String, Object> updateSermon(Sermon sermon) {
-        return null;
+        try{
+            if(sermonExists(sermon.getId()).isPresent()){
+                Sermon updatedSermon =  this.sermonRepository.save(sermon);
+                return responseAPI(updatedSermon,"Sermon updated ", HttpStatus.OK);
+            }
+            return responseAPI(null,"Sermon doesnt exist", HttpStatus.NO_CONTENT);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override
