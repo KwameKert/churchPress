@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
 @Configuration
-public class CorsConfiguration extends WebMvcConfigurerAdapter
+public class CorsConfiguration implements WebMvcConfigurer
 {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+                .allowedMethods("GET", "POST","PUT","DELETE");
     }
 
 

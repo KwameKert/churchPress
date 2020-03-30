@@ -30,7 +30,7 @@ public class SermonController {
         return new ResponseEntity<>(this.sermonService.listSermons(), HttpStatus.OK);
     }
 
-    @DeleteMapping("{id")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteSermon(@PathVariable("id") Long id){
         return new ResponseEntity<>(this.sermonService.softDeleteSermon(id),HttpStatus.OK);
 

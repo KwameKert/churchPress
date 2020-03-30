@@ -88,7 +88,7 @@ public class SermonServiceImpl implements SermonService {
     @Override
     public HashMap<String, Object> listSermons() {
         try{
-            List<Sermon> sermons = this.sermonRepository.findAll();
+            List<Sermon> sermons = this.sermonRepository.findAllByStatNotOrderByIdAsc("inactive");
             if(sermons.isEmpty()){
                 return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
             }
