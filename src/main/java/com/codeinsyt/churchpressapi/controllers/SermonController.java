@@ -30,9 +30,18 @@ public class SermonController {
         return new ResponseEntity<>(this.sermonService.listSermons(), HttpStatus.OK);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<?> getSermon(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.sermonService.getSermon(id), HttpStatus.OK);
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteSermon(@PathVariable("id") Long id){
         return new ResponseEntity<>(this.sermonService.softDeleteSermon(id),HttpStatus.OK);
-
     }
+
+
+
+
+
 }

@@ -45,17 +45,17 @@ public class SermonServiceImpl implements SermonService {
 
     }
 
-    public boolean sermonExists(Long id){
+    public Optional<Sermon> sermonExists(Long id){
         try{
             Optional<Sermon> foundSermon = this.sermonRepository.findById(id);
             if(foundSermon.isPresent()){
-                return true;
+                return foundSermon;
             }
-            return false;
+            return null;
 
         }catch(Exception e){
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -68,7 +68,7 @@ public class SermonServiceImpl implements SermonService {
     public HashMap<String, Object> softDeleteSermon(Long id) {
 
             try{
-                if(sermonExists(id)){
+                if(sermonExists(id).isPresent()){
                     this.sermonRepository.UpdateSermonStat(id, "inactive");
                     return this.listSermons();
                 }
@@ -101,6 +101,16 @@ public class SermonServiceImpl implements SermonService {
 
     @Override
     public HashMap<String, Object> getSermon(Long id) {
-        return null;
+
+        try {
+            if (sermonExists(id).isPresent()) {
+                return responseAPI(sermonExists(id).get(),"Sermon Found",HttpStatus.OK);
+            }
+            return responseAPI(null, "Sermon doesnt exist", HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return responseAPI(null, e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 }
