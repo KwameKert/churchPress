@@ -2,7 +2,9 @@ package com.codeinsyt.churchpressapi.services.impl;
 
 
 import com.codeinsyt.churchpressapi.models.Department;
+import com.codeinsyt.churchpressapi.repositories.DepartmentRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,14 @@ import java.util.HashMap;
 
 @Service
 public class DepartmentServiceImpl  implements DepartmentService {
+
+    private DepartmentRepository departmentRepository;
+
+
+    @Autowired
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
+    }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
         HashMap<String, Object> responseData = new HashMap<>();
@@ -22,7 +32,16 @@ public class DepartmentServiceImpl  implements DepartmentService {
 
     @Override
     public HashMap<String, Object> createDepartment(Department department) {
-        return null;
+
+        try{
+            Department newDepartment = this.departmentRepository.save(department);
+            return responseAPI(newDepartment,"Department saved", HttpStatus.OK);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override
