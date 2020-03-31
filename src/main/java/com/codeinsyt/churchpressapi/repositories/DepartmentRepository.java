@@ -15,5 +15,6 @@ public interface DepartmentRepository  extends JpaRepository<Department, Long> {
     @Transactional
     int UpdateDepartmentStat(Long departmentId, String status);
 
-    List<Department> findAllByStatOrderByIdAsc(String status);
+    List<Department> findAllByStatNotOrderByIdAsc(String status);
+;
 }

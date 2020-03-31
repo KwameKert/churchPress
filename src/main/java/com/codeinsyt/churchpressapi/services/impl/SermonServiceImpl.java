@@ -93,7 +93,17 @@ public class SermonServiceImpl implements SermonService {
 
     @Override
     public HashMap<String, Object> hardDeleteSermon(Long id) {
-        return null;
+        try{
+            if(sermonExists(id).isPresent()){
+                this.sermonRepository.deleteById(id);
+                return this.listSermons();
+            }
+            return responseAPI(null,"Sermon doesnt exist", HttpStatus.NO_CONTENT);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl  implements DepartmentService {
@@ -44,28 +46,95 @@ public class DepartmentServiceImpl  implements DepartmentService {
 
     }
 
+    public Optional<Department> departmentExists(Long id){
+        try{
+            Optional<Department> foundDepartment = this.departmentRepository.findById(id);
+            if(foundDepartment.isPresent()){
+                return foundDepartment;
+            }
+            return null;
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     @Override
     public HashMap<String, Object> updateDepartment(Department department) {
-        return null;
+
+        try{
+            if(departmentExists(department.getId()).isPresent()){
+                Department updatedDepartment =  this.departmentRepository.save(department);
+                return responseAPI(updatedDepartment,"Department updated ", HttpStatus.OK);
+            }
+            return responseAPI(null,"Department doesnt exist", HttpStatus.NO_CONTENT);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override
     public HashMap<String, Object> softDeleteDepartment(Long id) {
-        return null;
+
+        try{
+            if(departmentExists(id).isPresent()){
+                this.departmentRepository.UpdateDepartmentStat(id, "inactive");
+                return this.listDepartments();
+            }
+            return responseAPI(null,"Department doesnt exist", HttpStatus.NO_CONTENT);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> hardDeleteDepartment(Long id) {
-        return null;
+
+        try{
+            if(departmentExists(id).isPresent()){
+                this.departmentRepository.deleteById(id);
+                return this.listDepartments();
+            }
+            return responseAPI(null,"Department doesnt exist", HttpStatus.NO_CONTENT);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> listDepartments() {
-        return null;
+
+        try{
+            List<Department> sermons = this.departmentRepository.
+                                        findAllByStatNotOrderByIdAsc("inactive");
+            if(sermons.isEmpty()){
+                return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
+            }
+            return responseAPI(sermons,"Departments",HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> getDepartment(Long id) {
-        return null;
+
+        try {
+            if (departmentExists(id).isPresent()) {
+                return responseAPI(departmentExists(id).get(),"Department Found",HttpStatus.OK);
+            }
+            return responseAPI(null, "Department doesnt exist", HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return responseAPI(null, e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }
