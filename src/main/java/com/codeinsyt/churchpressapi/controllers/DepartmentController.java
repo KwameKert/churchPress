@@ -5,9 +5,7 @@ import com.codeinsyt.churchpressapi.services.interfaces.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,7 +22,23 @@ public class DepartmentController {
     }
 
 
+    @PostMapping
     public ResponseEntity<?> addDepartment(@Valid @RequestBody Department department){
         return new ResponseEntity<>(this.departmentService.createDepartment(department), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateDepartment(@Valid @RequestBody Department department){
+        return new ResponseEntity<>(this.departmentService.updateDepartment(department), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> updateDepartment(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.departmentService.getDepartment(id), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listDepartments(){
+        return new ResponseEntity<>(this.departmentService.listDepartments(), HttpStatus.OK);
     }
 }
