@@ -8,3 +8,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+
+  flyway:
+    baselineOnMigrate : true

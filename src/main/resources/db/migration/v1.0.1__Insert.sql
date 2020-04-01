@@ -1,0 +1,1 @@
+INSERT INTO `app_users` VALUES (1, '2020-04-01 22:08:35', 'Asante', 'Kwame', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin', 'active', '2020-04-01 22:08:35', 'kwamekert');

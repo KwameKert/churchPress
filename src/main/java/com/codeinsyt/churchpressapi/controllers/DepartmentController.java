@@ -37,6 +37,11 @@ public class DepartmentController {
         return new ResponseEntity<>(this.departmentService.getDepartment(id), HttpStatus.OK);
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteDepartment(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.departmentService.softDeleteDepartment(id), HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<?> listDepartments(){
         return new ResponseEntity<>(this.departmentService.listDepartments(), HttpStatus.OK);
