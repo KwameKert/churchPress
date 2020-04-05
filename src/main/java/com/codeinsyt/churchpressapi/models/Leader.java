@@ -19,6 +19,7 @@ public class Leader {
     @Lob
     private String description;
     private String stat;
+    private String image_url;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable= false)
@@ -33,6 +34,13 @@ public class Leader {
     public Leader() {
     }
 
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
 
     public Long getId() {
         return id;
