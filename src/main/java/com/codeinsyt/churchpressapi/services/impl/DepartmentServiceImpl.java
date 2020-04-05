@@ -86,7 +86,7 @@ public class DepartmentServiceImpl  implements DepartmentService {
                 this.departmentRepository.UpdateDepartmentStat(id, "inactive");
                 return this.listDepartments();
             }
-            return responseAPI(null,"Department doesnt exist", HttpStatus.NO_CONTENT);
+            return responseAPI(null,"Department doesnt exist", HttpStatus.NOT_FOUND);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
@@ -101,7 +101,7 @@ public class DepartmentServiceImpl  implements DepartmentService {
                 this.departmentRepository.deleteById(id);
                 return this.listDepartments();
             }
-            return responseAPI(null,"Department doesnt exist", HttpStatus.NO_CONTENT);
+            return responseAPI(null,"Department doesnt exist", HttpStatus.NOT_FOUND);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
@@ -117,7 +117,7 @@ public class DepartmentServiceImpl  implements DepartmentService {
             if(sermons.isEmpty()){
                 return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
             }
-            return responseAPI(sermons,"Departments",HttpStatus.OK);
+            return responseAPI(sermons,"Departments",HttpStatus.FOUND);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
