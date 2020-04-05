@@ -66,7 +66,7 @@ public class SermonServiceImpl implements SermonService {
                 Sermon updatedSermon =  this.sermonRepository.save(sermon);
                 return responseAPI(updatedSermon,"Sermon updated ", HttpStatus.OK);
             }
-            return responseAPI(null,"Sermon doesnt exist", HttpStatus.NO_CONTENT);
+            return responseAPI(null,"Sermon doesnt exist", HttpStatus.NOT_FOUND);
 
         }catch(Exception e){
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class SermonServiceImpl implements SermonService {
                     this.sermonRepository.UpdateSermonStat(id, "inactive");
                     return this.listSermons();
                 }
-               return responseAPI(null,"Sermon doesnt exist", HttpStatus.NO_CONTENT);
+               return responseAPI(null,"Sermon doesnt exist", HttpStatus.NOT_FOUND);
             }catch(Exception e){
                 e.printStackTrace();
                 return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
@@ -98,7 +98,7 @@ public class SermonServiceImpl implements SermonService {
                 this.sermonRepository.deleteById(id);
                 return this.listSermons();
             }
-            return responseAPI(null,"Sermon doesnt exist", HttpStatus.NO_CONTENT);
+            return responseAPI(null,"Sermon doesnt exist", HttpStatus.NOT_FOUND);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
@@ -111,7 +111,7 @@ public class SermonServiceImpl implements SermonService {
         try{
             List<Sermon> sermons = this.sermonRepository.findAllByStatNotOrderByIdAsc("inactive");
             if(sermons.isEmpty()){
-                return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
+                return responseAPI(null, "No sermon found",HttpStatus.FOUND);
             }
             return responseAPI(sermons,"Sermons",HttpStatus.OK);
         }catch(Exception e){
@@ -125,9 +125,9 @@ public class SermonServiceImpl implements SermonService {
 
         try {
             if (sermonExists(id).isPresent()) {
-                return responseAPI(sermonExists(id).get(),"Sermon Found",HttpStatus.OK);
+                return responseAPI(sermonExists(id).get(),"Sermon Found",HttpStatus.FOUND);
             }
-            return responseAPI(null, "Sermon doesnt exist", HttpStatus.NO_CONTENT);
+            return responseAPI(null, "Sermon doesnt exist", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             e.printStackTrace();
             return responseAPI(null, e.getMessage(), HttpStatus.EXPECTATION_FAILED);
