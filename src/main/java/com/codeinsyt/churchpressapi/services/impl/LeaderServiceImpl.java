@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -107,11 +108,30 @@ public class LeaderServiceImpl implements LeaderService {
 
     @Override
     public HashMap<String, Object> listLeaders() {
-        return null;
+
+        try{
+            List<Leader> sermons = this.leaderRepository.findAllByStatOrderByIdAsc("inactive");
+            if(sermons.isEmpty()){
+                return responseAPI(null, "No leader found",HttpStatus.FOUND);
+            }
+            return responseAPI(sermons,"Leaders",HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> getLeader(Long id) {
-        return null;
+
+        try {
+            if (leaderExists(id).isPresent()) {
+                return responseAPI(leaderExists(id).get(),"Leader Found",HttpStatus.FOUND);
+            }
+            return responseAPI(null, "Leader doesnt exist", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return responseAPI(null, e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }
