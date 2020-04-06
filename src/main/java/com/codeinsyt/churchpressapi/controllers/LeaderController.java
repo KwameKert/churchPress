@@ -39,8 +39,8 @@ public class LeaderController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteDepartment(@PathVariable("id") Long id){
-        return new ResponseEntity<>(this.departmentService.softDeleteDepartment(id), HttpStatus.OK);
+    public ResponseEntity<?> deleteLeader(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.leaderService.softDeleteLeader(id), HttpStatus.OK);
     }
 
     @GetMapping
