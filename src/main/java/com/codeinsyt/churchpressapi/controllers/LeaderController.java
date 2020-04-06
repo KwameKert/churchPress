@@ -29,8 +29,8 @@ public class LeaderController {
     }
 
     @PutMapping
-    public ResponseEntity<?> updateDepartment(@Valid @RequestBody Department department){
-        return new ResponseEntity<>(this.departmentService.updateDepartment(department), HttpStatus.OK);
+    public ResponseEntity<?> updateLeader(@Valid @RequestBody LeaderDTO leaderDTO){
+        return new ResponseEntity<>(this.leaderService.updateLeader(leaderDTO), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
