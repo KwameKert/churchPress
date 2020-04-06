@@ -82,15 +82,23 @@ public class LeaderServiceImpl implements LeaderService {
             if(leaderExists(leaderDTO.getId()).isPresent()){
 
                 Leader leader = new Leader();
-                leader.setRole(leaderDTO.getRole());
                 leader.setId(leaderDTO.getId());
                 leader.setName(leaderDTO.getName());
+                leader.setRole(leaderDTO.getRole());
+                leader.setStat(leaderDTO.getStat());
                 leader.setDescription(leaderDTO.getDescription());
                 leader.setDepartment(this.departmentRepository.findById(leaderDTO.getDepartment_id()).get());
                 leader.setImage_url(leaderDTO.getImage_url());
 
-                Leader updatedLeader =  this.leaderRepository.save(leader);
-                return responseAPI(updatedLeader,"Leader updated ", HttpStatus.OK);
+               // System.out.println(leader);
+               // Leader newLeader = this.leaderRepository.save(leader);
+
+
+
+
+
+               Leader updatedLeader =  this.leaderRepository.save(leader);
+                return responseAPI(null,"Leader updated ", HttpStatus.OK);
             }
             return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
 
@@ -135,11 +143,11 @@ public class LeaderServiceImpl implements LeaderService {
     public HashMap<String, Object> listLeaders() {
 
         try{
-            List<Leader> sermons = this.leaderRepository.findAllByStatNotOrderByIdAsc("inactive");
-            if(sermons.isEmpty()){
-                return responseAPI(null, "No leader found",HttpStatus.FOUND);
+            List<Leader> leaders = this.leaderRepository.findAllByStatNotOrderByIdAsc("inactive");
+            if(leaders.isEmpty()){
+                return responseAPI(null, "No leader found",HttpStatus.NOT_FOUND);
             }
-            return responseAPI(sermons,"Leaders",HttpStatus.OK);
+            return responseAPI(leaders,"Leaders",HttpStatus.FOUND);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);

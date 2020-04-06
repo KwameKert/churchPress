@@ -48,6 +48,9 @@ public class Leader {
         return role;
     }
 
+
+
+
     public void setRole(String role) {
         this.role = role;
     }
@@ -108,13 +111,16 @@ public class Leader {
         this.updatedAt = updatedAt;
     }
 
+
     @Override
     public String toString() {
         return "Leader{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
                 ", description='" + description + '\'' +
                 ", stat='" + stat + '\'' +
+                ", image_url='" + image_url + '\'' +
                 ", department=" + department +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

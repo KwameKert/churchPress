@@ -105,6 +105,7 @@ public class Department {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", stat='" + stat + '\'' +
+                ", image_url='" + image_url + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", leaders=" + leaders +

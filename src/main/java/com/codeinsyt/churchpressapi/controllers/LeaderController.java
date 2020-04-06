@@ -30,6 +30,7 @@ public class LeaderController {
 
     @PutMapping
     public ResponseEntity<?> updateLeader(@Valid @RequestBody LeaderDTO leaderDTO){
+        //System.out.println("Update leader");
         return new ResponseEntity<>(this.leaderService.updateLeader(leaderDTO), HttpStatus.OK);
     }
 

@@ -80,5 +80,18 @@ public class LeaderDTO {
     public void setDepartment_id(Long department_id) {
         this.department_id = department_id;
     }
+
+    @Override
+    public String toString() {
+        return "LeaderDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                ", description='" + description + '\'' +
+                ", stat='" + stat + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", department_id=" + department_id +
+                '}';
+    }
 }
 
