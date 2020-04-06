@@ -12,6 +12,7 @@ public class LeaderDTO {
 
     private Long id;
     private String name;
+    private String role;
     @Lob
     private String description;
     private String stat;
@@ -24,6 +25,15 @@ public class LeaderDTO {
 
     public Long getId() {
         return id;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setId(Long id) {

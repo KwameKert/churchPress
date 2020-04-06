@@ -16,6 +16,7 @@ public class Leader {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String role;
     @Lob
     private String description;
     private String stat;
@@ -40,6 +41,15 @@ public class Leader {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getId() {

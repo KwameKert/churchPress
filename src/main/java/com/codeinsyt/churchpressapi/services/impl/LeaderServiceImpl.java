@@ -46,6 +46,7 @@ public class LeaderServiceImpl implements LeaderService {
 
             Leader leader = new Leader();
             leader.setName(leaderDTO.getName());
+            leader.setRole(leaderDTO.getRole());
             leader.setDescription(leaderDTO.getDescription());
             leader.setDepartment(this.departmentRepository.findById(leaderDTO.getDepartment_id()).get());
             leader.setImage_url(leaderDTO.getImage_url());
@@ -80,6 +81,7 @@ public class LeaderServiceImpl implements LeaderService {
             if(leaderExists(leaderDTO.getId()).isPresent()){
 
                 Leader leader = new Leader();
+                leader.setRole(leaderDTO.getRole());
                 leader.setId(leaderDTO.getId());
                 leader.setName(leaderDTO.getName());
                 leader.setDescription(leaderDTO.getDescription());
