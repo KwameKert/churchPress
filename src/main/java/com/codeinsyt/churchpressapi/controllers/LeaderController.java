@@ -44,8 +44,8 @@ public class LeaderController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listDepartments(){
-        return new ResponseEntity<>(this.departmentService.listDepartments(), HttpStatus.OK);
+    public ResponseEntity<?> listLeaders(){
+        return new ResponseEntity<>(this.leaderService.listLeaders(), HttpStatus.OK);
     }
 
 
