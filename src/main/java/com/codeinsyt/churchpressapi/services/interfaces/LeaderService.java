@@ -1,14 +1,15 @@
 package com.codeinsyt.churchpressapi.services.interfaces;
 
+import com.codeinsyt.churchpressapi.dto.LeaderDTO;
 import com.codeinsyt.churchpressapi.models.Leader;
 
 import java.util.HashMap;
 
 public interface LeaderService {
 
-    HashMap<String, Object> createLeader(Leader leader);
+    HashMap<String, Object> createLeader(LeaderDTO leaderDTO);
 
-    HashMap<String, Object> updateLeader(Leader leader);
+    HashMap<String, Object> updateLeader(LeaderDTO leaderDTO);
 
     HashMap<String, Object>  softDeleteLeader(Long id);
 

@@ -1,8 +1,10 @@
 package com.codeinsyt.churchpressapi.services.impl;
 
+import com.codeinsyt.churchpressapi.dto.LeaderDTO;
 import com.codeinsyt.churchpressapi.models.Department;
 import com.codeinsyt.churchpressapi.models.Leader;
 import com.codeinsyt.churchpressapi.models.Sermon;
+import com.codeinsyt.churchpressapi.repositories.DepartmentRepository;
 import com.codeinsyt.churchpressapi.repositories.LeaderRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.LeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,16 @@ import java.util.Optional;
 public class LeaderServiceImpl implements LeaderService {
 
     private LeaderRepository leaderRepository;
+    private DepartmentRepository departmentRepository;
 
     @Autowired
-    public LeaderServiceImpl(LeaderRepository leaderRepository) {
+    public LeaderServiceImpl(LeaderRepository leaderRepository, DepartmentRepository departmentRepository) {
         this.leaderRepository = leaderRepository;
+        this.departmentRepository = departmentRepository;
     }
+
+
+
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
         HashMap<String, Object> responseData = new HashMap<>();
@@ -33,9 +40,16 @@ public class LeaderServiceImpl implements LeaderService {
     }
 
     @Override
-    public HashMap<String, Object> createLeader(Leader leader) {
+    public HashMap<String, Object> createLeader(LeaderDTO leaderDTO) {
 
         try{
+
+            Leader leader = new Leader();
+            leader.setName(leaderDTO.getName());
+            leader.setDescription(leaderDTO.getDescription());
+            leader.setDepartment(this.departmentRepository.findById(leaderDTO.getDepartment_id()).get());
+            leader.setImage_url(leaderDTO.getImage_url());
+
             Leader newLeader = this.leaderRepository.save(leader);
             return responseAPI(newLeader,"Leader saved", HttpStatus.OK);
 
@@ -60,12 +74,20 @@ public class LeaderServiceImpl implements LeaderService {
     }
 
     @Override
-    public HashMap<String, Object> updateLeader(Leader leader) {
+    public HashMap<String, Object> updateLeader(LeaderDTO leaderDTO) {
 
         try{
-            if(leaderExists(leader.getId()).isPresent()){
-                Leader updatedSermon =  this.leaderRepository.save(leader);
-                return responseAPI(updatedSermon,"Leader updated ", HttpStatus.OK);
+            if(leaderExists(leaderDTO.getId()).isPresent()){
+
+                Leader leader = new Leader();
+                leader.setId(leaderDTO.getId());
+                leader.setName(leaderDTO.getName());
+                leader.setDescription(leaderDTO.getDescription());
+                leader.setDepartment(this.departmentRepository.findById(leaderDTO.getDepartment_id()).get());
+                leader.setImage_url(leaderDTO.getImage_url());
+
+                Leader updatedLeader =  this.leaderRepository.save(leader);
+                return responseAPI(updatedLeader,"Leader updated ", HttpStatus.OK);
             }
             return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
 
