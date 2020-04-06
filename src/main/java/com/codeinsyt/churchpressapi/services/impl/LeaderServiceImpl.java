@@ -47,6 +47,7 @@ public class LeaderServiceImpl implements LeaderService {
             Leader leader = new Leader();
             leader.setName(leaderDTO.getName());
             leader.setRole(leaderDTO.getRole());
+            leader.setStat(leaderDTO.getStat());
             leader.setDescription(leaderDTO.getDescription());
             leader.setDepartment(this.departmentRepository.findById(leaderDTO.getDepartment_id()).get());
             leader.setImage_url(leaderDTO.getImage_url());
