@@ -2,6 +2,7 @@ package com.codeinsyt.churchpressapi.services.impl;
 
 import com.codeinsyt.churchpressapi.models.Department;
 import com.codeinsyt.churchpressapi.models.Leader;
+import com.codeinsyt.churchpressapi.models.Sermon;
 import com.codeinsyt.churchpressapi.repositories.LeaderRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.LeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @Service
 public class LeaderServiceImpl implements LeaderService {
@@ -42,19 +44,65 @@ public class LeaderServiceImpl implements LeaderService {
         }
     }
 
+    public Optional<Leader> leaderExists(Long id){
+        try{
+            Optional<Leader> foundLeader = this.leaderRepository.findById(id);
+            if(foundLeader.isPresent()){
+                return foundLeader;
+            }
+            return null;
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public HashMap<String, Object> updateLeader(Leader leader) {
-        return null;
+
+        try{
+            if(leaderExists(leader.getId()).isPresent()){
+                Leader updatedSermon =  this.leaderRepository.save(leader);
+                return responseAPI(updatedSermon,"Leader updated ", HttpStatus.OK);
+            }
+            return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override
     public HashMap<String, Object> softDeleteLeader(Long id) {
-        return null;
+         try{
+            if(leaderExists(id).isPresent()){
+                this.leaderRepository.UpdateLeaderStat(id, "inactive");
+                return this.listLeaders();
+            }
+            return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
     public HashMap<String, Object> hardDeleteLeader(Long id) {
-        return null;
+
+        try{
+            if(leaderExists(id).isPresent()){
+                this.leaderRepository.deleteById(id);
+                return this.listLeaders();
+            }
+            return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
 
     @Override
