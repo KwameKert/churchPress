@@ -1,13 +1,24 @@
 package com.codeinsyt.churchpressapi.services.impl;
 
+import com.codeinsyt.churchpressapi.models.Department;
 import com.codeinsyt.churchpressapi.models.Leader;
+import com.codeinsyt.churchpressapi.repositories.LeaderRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.LeaderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+@Service
 public class LeaderServiceImpl implements LeaderService {
 
+    private LeaderRepository leaderRepository;
+
+    @Autowired
+    public LeaderServiceImpl(LeaderRepository leaderRepository) {
+        this.leaderRepository = leaderRepository;
+    }
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
         HashMap<String, Object> responseData = new HashMap<>();
@@ -20,7 +31,15 @@ public class LeaderServiceImpl implements LeaderService {
 
     @Override
     public HashMap<String, Object> createLeader(Leader leader) {
-        return null;
+
+        try{
+            Leader newLeader = this.leaderRepository.save(leader);
+            return responseAPI(newLeader,"Leader saved", HttpStatus.OK);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
