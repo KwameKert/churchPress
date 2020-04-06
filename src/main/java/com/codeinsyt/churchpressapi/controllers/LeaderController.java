@@ -34,8 +34,8 @@ public class LeaderController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> updateDepartment(@PathVariable("id") Long id){
-        return new ResponseEntity<>(this.departmentService.getDepartment(id), HttpStatus.OK);
+    public ResponseEntity<?> getLeader(@PathVariable("id") Long id){
+        return new ResponseEntity<>(this.leaderService.getLeader(id), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
