@@ -15,5 +15,5 @@ public interface LeaderRepository extends JpaRepository<Leader, Long> {
     @Transactional
     int UpdateLeaderStat(Long leaderId, String status);
 
-    List<Leader> findAllByStatOrderByIdAsc(String status);
+    List<Leader> findAllByStatNotOrderByIdAsc(String status);
 }

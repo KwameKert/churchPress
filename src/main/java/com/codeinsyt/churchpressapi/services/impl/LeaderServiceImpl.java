@@ -132,7 +132,7 @@ public class LeaderServiceImpl implements LeaderService {
     public HashMap<String, Object> listLeaders() {
 
         try{
-            List<Leader> sermons = this.leaderRepository.findAllByStatOrderByIdAsc("inactive");
+            List<Leader> sermons = this.leaderRepository.findAllByStatNotOrderByIdAsc("inactive");
             if(sermons.isEmpty()){
                 return responseAPI(null, "No leader found",HttpStatus.FOUND);
             }

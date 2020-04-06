@@ -113,7 +113,7 @@ public class DepartmentServiceImpl  implements DepartmentService {
 
         try{
             List<Department> sermons = this.departmentRepository.
-                                        findAllByStatNotOrderByIdAsc("inactive");
+                    findAllByStatNotOrderByIdAsc("inactive");
             if(sermons.isEmpty()){
                 return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
             }

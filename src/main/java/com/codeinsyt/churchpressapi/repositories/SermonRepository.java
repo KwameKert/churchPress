@@ -16,4 +16,5 @@ public interface SermonRepository extends JpaRepository<Sermon, Long> {
     int UpdateSermonStat(Long sermonId, String status);
 
     List<Sermon> findAllByStatNotOrderByIdAsc(String status);
+
 }
