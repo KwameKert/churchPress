@@ -22,6 +22,7 @@ public class Leader {
     private String stat;
     private String image_url;
 
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable= false)
     @JsonIgnore
@@ -34,6 +35,8 @@ public class Leader {
 
     public Leader() {
     }
+
+
 
     public String getImage_url() {
         return image_url;

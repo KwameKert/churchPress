@@ -78,9 +78,11 @@ public class LeaderServiceImpl implements LeaderService {
     @Override
     public HashMap<String, Object> updateLeader(LeaderDTO leaderDTO) {
 
+        System.out.println("Updating student");
         try{
             if(leaderExists(leaderDTO.getId()).isPresent()){
 
+                //System.out.println(leaderDTO);
                 Leader leader = new Leader();
                 leader.setId(leaderDTO.getId());
                 leader.setName(leaderDTO.getName());
@@ -90,15 +92,9 @@ public class LeaderServiceImpl implements LeaderService {
                 leader.setDepartment(this.departmentRepository.findById(leaderDTO.getDepartment_id()).get());
                 leader.setImage_url(leaderDTO.getImage_url());
 
-               // System.out.println(leader);
-               // Leader newLeader = this.leaderRepository.save(leader);
-
-
-
-
 
                Leader updatedLeader =  this.leaderRepository.save(leader);
-                return responseAPI(null,"Leader updated ", HttpStatus.OK);
+                return responseAPI(updatedLeader,"Leader updated ", HttpStatus.OK);
             }
             return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
 
@@ -113,7 +109,7 @@ public class LeaderServiceImpl implements LeaderService {
     public HashMap<String, Object> softDeleteLeader(Long id) {
          try{
             if(leaderExists(id).isPresent()){
-                this.leaderRepository.UpdateLeaderStat(id, "inactive");
+                this.leaderRepository.UpdateLeaderStat(id, "deleted");
                 return this.listLeaders();
             }
             return responseAPI(null,"Leader doesnt exist", HttpStatus.NOT_FOUND);
@@ -143,7 +139,7 @@ public class LeaderServiceImpl implements LeaderService {
     public HashMap<String, Object> listLeaders() {
 
         try{
-            List<Leader> leaders = this.leaderRepository.findAllByStatNotOrderByIdAsc("inactive");
+            List<Leader> leaders = this.leaderRepository.findAllByStatNotOrderByIdAsc("deleted");
             if(leaders.isEmpty()){
                 return responseAPI(null, "No leader found",HttpStatus.NOT_FOUND);
             }
