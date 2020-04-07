@@ -80,7 +80,7 @@ public class SermonServiceImpl implements SermonService {
 
             try{
                 if(sermonExists(id).isPresent()){
-                    this.sermonRepository.UpdateSermonStat(id, "inactive");
+                    this.sermonRepository.UpdateSermonStat(id, "deleted");
                     return this.listSermons();
                 }
                return responseAPI(null,"Sermon doesnt exist", HttpStatus.NOT_FOUND);
@@ -109,7 +109,7 @@ public class SermonServiceImpl implements SermonService {
     @Override
     public HashMap<String, Object> listSermons() {
         try{
-            List<Sermon> sermons = this.sermonRepository.findAllByStatNotOrderByIdAsc("inactive");
+            List<Sermon> sermons = this.sermonRepository.findAllByStatNotOrderByIdAsc("deleted");
             if(sermons.isEmpty()){
                 return responseAPI(null, "No sermon found",HttpStatus.FOUND);
             }

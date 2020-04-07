@@ -83,7 +83,7 @@ public class DepartmentServiceImpl  implements DepartmentService {
 
         try{
             if(departmentExists(id).isPresent()){
-                this.departmentRepository.UpdateDepartmentStat(id, "inactive");
+                this.departmentRepository.UpdateDepartmentStat(id, "deleted");
                 return this.listDepartments();
             }
             return responseAPI(null,"Department doesnt exist", HttpStatus.NOT_FOUND);
@@ -113,9 +113,9 @@ public class DepartmentServiceImpl  implements DepartmentService {
 
         try{
             List<Department> sermons = this.departmentRepository.
-                    findAllByStatNotOrderByIdAsc("inactive");
+                    findAllByStatNotOrderByIdAsc("deleted");
             if(sermons.isEmpty()){
-                return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
+                return responseAPI(null, "No department found",HttpStatus.NO_CONTENT);
             }
             return responseAPI(sermons,"Departments",HttpStatus.FOUND);
         }catch(Exception e){
