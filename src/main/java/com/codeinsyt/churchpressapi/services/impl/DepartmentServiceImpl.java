@@ -112,8 +112,10 @@ public class DepartmentServiceImpl  implements DepartmentService {
     public HashMap<String, Object> listDepartments() {
 
         try{
+//            List<Department> sermons = this.departmentRepository.
+//                    findAllByStatNotOrderByIdAsc("deleted");
             List<Department> sermons = this.departmentRepository.
-                    findAllByStatNotOrderByIdAsc("deleted");
+                    findAll();
             if(sermons.isEmpty()){
                 return responseAPI(null, "No department found",HttpStatus.NO_CONTENT);
             }
