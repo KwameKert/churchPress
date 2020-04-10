@@ -24,6 +24,8 @@ public class Event {
 
     private Date endDate;
 
+    private String stat;
+
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -54,6 +56,14 @@ public class Event {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
     }
 
     public void setImgUrl(String imgUrl) {
