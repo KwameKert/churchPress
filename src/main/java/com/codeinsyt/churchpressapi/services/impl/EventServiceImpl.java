@@ -39,6 +39,7 @@ public class EventServiceImpl implements EventService {
 
 
         }catch(Exception e){
+            e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
     }
@@ -72,6 +73,7 @@ public class EventServiceImpl implements EventService {
            return responseAPI(null, "Event not found", HttpStatus.NOT_FOUND);
 
        }catch(Exception e){
+           e.printStackTrace();
            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
        }
     }
@@ -88,13 +90,23 @@ public class EventServiceImpl implements EventService {
             return responseAPI(null, "Event not found", HttpStatus.NOT_FOUND);
 
         }catch(Exception e){
+            e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
     }
 
     @Override
     public HashMap<String, Object> softDeleteEvent(Long eventId) {
-        return null;
+        try{
+            if(eventExists(eventId).isPresent()){
+                this.eventRepository.UpdateEventStat(eventId, "deleted");
+                return this.listEvents();
+            }
+            return responseAPI(null,"Event doesnt exist", HttpStatus.NOT_FOUND);
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @Override
