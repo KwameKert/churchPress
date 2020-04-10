@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class EventServiceImpl implements EventService {
@@ -111,6 +112,20 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public HashMap<String, Object> listEvents() {
-        return null;
+        try{
+
+            List<Event> events = this.eventRepository.findAllByStatNotOrderByIdAsc("deleted");
+
+            if(events.isEmpty()){
+                return responseAPI(null, "No event found",HttpStatus.NO_CONTENT);
+            }
+
+            return responseAPI(events, "Events found",HttpStatus.FOUND);
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }

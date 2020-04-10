@@ -111,7 +111,7 @@ public class SermonServiceImpl implements SermonService {
         try{
             List<Sermon> sermons = this.sermonRepository.findAllByStatNotOrderByIdAsc("deleted");
             if(sermons.isEmpty()){
-                return responseAPI(null, "No sermon found",HttpStatus.FOUND);
+                return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
             }
             return responseAPI(sermons,"Sermons",HttpStatus.OK);
         }catch(Exception e){
