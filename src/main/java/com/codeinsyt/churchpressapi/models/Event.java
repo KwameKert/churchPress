@@ -4,8 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -82,12 +80,9 @@ public class Event {
         this.description = description;
     }
 
-    public Date getStartDate() throws ParseException {
+    public Date getStartDate() {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        Date date = simpleDateFormat.parse(String.valueOf(startDate));
-        return date;
+        return startDate;
     }
 
     public void setStartDate(Date startDate) {
