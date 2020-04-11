@@ -4,6 +4,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -15,7 +17,7 @@ public class Event {
 
     private String name;
 
-    private String imgUrl;
+    private String imageUrl;
 
     @Lob
     private String description;
@@ -54,9 +56,7 @@ public class Event {
         this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+
 
     public String getStat() {
         return stat;
@@ -66,8 +66,12 @@ public class Event {
         this.stat = stat;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDescription() {
@@ -78,8 +82,12 @@ public class Event {
         this.description = description;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartDate() throws ParseException {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date date = simpleDateFormat.parse(String.valueOf(startDate));
+        return date;
     }
 
     public void setStartDate(Date startDate) {
