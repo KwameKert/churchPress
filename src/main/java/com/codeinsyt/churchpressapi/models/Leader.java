@@ -23,14 +23,17 @@ public class Leader {
     private String stat;
     private String image_url;
 
+    private String dep_name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable= false)
     @JsonIgnore
     private Department department;
     @CreationTimestamp
+    @JsonIgnore
     @Column(updatable = false)
     private Date createdAt;
+    @JsonIgnore
     @UpdateTimestamp
     private Date updatedAt;
 
@@ -38,6 +41,9 @@ public class Leader {
     }
 
 
+    public String getDep_name() {
+        return department.getName();
+    }
 
     public String getImage_url() {
         return image_url;

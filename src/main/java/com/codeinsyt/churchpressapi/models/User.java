@@ -1,6 +1,7 @@
 package com.codeinsyt.churchpressapi.models;
 
 import com.codeinsyt.churchpressapi.utils.EncryptPassword;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -24,8 +25,10 @@ public class User {
     private String stat;
     @CreationTimestamp
     @Column(updatable = false)
+    @JsonIgnore
     private Date createdAt;
     @UpdateTimestamp
+    @JsonIgnore
     private Date updatedAt;
 
 

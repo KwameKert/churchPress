@@ -1,5 +1,6 @@
 package com.codeinsyt.churchpressapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -26,10 +27,12 @@ public class Event {
 
     private String stat;
 
+    @JsonIgnore
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
 
+    @JsonIgnore
     @UpdateTimestamp
     private Date updatedAt;
 
