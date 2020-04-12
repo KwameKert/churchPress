@@ -1,5 +1,6 @@
 package com.codeinsyt.churchpressapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +16,7 @@ public class Event {
 
     private String name;
 
-    private String imgUrl;
+    private String imageUrl;
 
     @Lob
     private String description;
@@ -26,9 +27,11 @@ public class Event {
 
     private String stat;
 
+    @JsonIgnore
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
+
 
     @UpdateTimestamp
     private Date updatedAt;
@@ -54,9 +57,7 @@ public class Event {
         this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+
 
     public String getStat() {
         return stat;
@@ -66,8 +67,12 @@ public class Event {
         this.stat = stat;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDescription() {
@@ -79,6 +84,7 @@ public class Event {
     }
 
     public Date getStartDate() {
+
         return startDate;
     }
 

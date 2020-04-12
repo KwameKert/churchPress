@@ -1,5 +1,6 @@
 package com.codeinsyt.churchpressapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -24,6 +25,7 @@ public class Department {
     @Column(updatable = false)
     private Date createdAt;
     @UpdateTimestamp
+    @JsonIgnore
     private Date updatedAt;
 
 
