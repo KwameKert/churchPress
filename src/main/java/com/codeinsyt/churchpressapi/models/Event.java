@@ -32,7 +32,7 @@ public class Event {
     @Column(updatable = false)
     private Date createdAt;
 
-    @JsonIgnore
+
     @UpdateTimestamp
     private Date updatedAt;
 

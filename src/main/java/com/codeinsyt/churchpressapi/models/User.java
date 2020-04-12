@@ -25,7 +25,6 @@ public class User {
     private String stat;
     @CreationTimestamp
     @Column(updatable = false)
-    @JsonIgnore
     private Date createdAt;
     @UpdateTimestamp
     @JsonIgnore

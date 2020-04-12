@@ -24,7 +24,6 @@ public class Sermon {
 
     @CreationTimestamp
     @Column(updatable = false)
-    @JsonIgnore
     private Date createdAt;
     @UpdateTimestamp
     @JsonIgnore

@@ -23,7 +23,6 @@ public class Department {
     private String image_url;
     @CreationTimestamp
     @Column(updatable = false)
-    @JsonIgnore
     private Date createdAt;
     @UpdateTimestamp
     @JsonIgnore
