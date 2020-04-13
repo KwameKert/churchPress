@@ -30,7 +30,7 @@ public class Leader {
     @JsonIgnore
     private Department department;
     @CreationTimestamp
-    @JsonIgnore
+
     @Column(updatable = false)
     private Date createdAt;
     @JsonIgnore
