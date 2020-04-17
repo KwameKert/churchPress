@@ -11,7 +11,7 @@ public interface DashboardService {
 
     Long countEvents();
 
-    Date getNextEventTime();
+    Long getNextEventTime();
 
     HashMap<String, Object> getDashboardComponents();
 

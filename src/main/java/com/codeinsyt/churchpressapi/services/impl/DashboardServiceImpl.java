@@ -48,10 +48,14 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public Date getNextEventTime() {
+    public Long getNextEventTime() {
         Event event = this.eventRepository.findTopByEndDateAfter(new Date());
 
-        return event.getEndDate();
+        Date endDate = event.getEndDate();
+        Date currentDate = new Date();
+
+        Long diff =   endDate.getTime()  - currentDate.getTime() ;
+        return diff;
     }
 
 
