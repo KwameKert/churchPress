@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -48,13 +50,27 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public Long getNextEventTime() {
+    public Long getNextEventTime() throws ParseException {
+      //  SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Event event = this.eventRepository.findTopByEndDateAfter(new Date());
 
-        Date endDate = event.getEndDate();
+//        Date endDate = format.parse(event.getEndDate().toString());
         Date currentDate = new Date();
 
-        Long diff =   endDate.getTime()  - currentDate.getTime() ;
+        Date endDate = event.getEndDate();
+
+        Date current = new Date();
+
+        Long d1 =   endDate.getTime()   ;
+        Long d2 = current.getTime();
+
+        System.out.println(d1);
+        System.out.println(d2);
+       Long diff = d1 -d2;
+
+
+
+        System.out.println(diff);
         return diff;
     }
 
