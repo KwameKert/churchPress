@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -20,4 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     int UpdateEventStat(Long eventId, String status);
 
     List<Event> findAllByStatNotOrderByIdAsc(String status);
+
+    Event findTopByEndDateBefore(Date endDate);
+
 }

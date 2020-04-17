@@ -2,6 +2,7 @@ package com.codeinsyt.churchpressapi.services.interfaces;
 
 import com.codeinsyt.churchpressapi.models.Event;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public interface DashboardService {
@@ -10,7 +11,7 @@ public interface DashboardService {
 
     Long countEvents();
 
-    Event getNextEvent();
+    Date getNextEventTime();
 
     HashMap<String, Object> getDashboardComponents();
 
