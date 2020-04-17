@@ -7,11 +7,12 @@ import com.codeinsyt.churchpressapi.repositories.SermonRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 
-
+@Service
 public class DashboardServiceImpl implements DashboardService {
 
     private SermonRepository sermonRepository;
