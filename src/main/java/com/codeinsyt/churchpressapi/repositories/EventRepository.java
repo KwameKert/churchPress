@@ -22,6 +22,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findAllByStatNotOrderByIdAsc(String status);
 
-    Event findTopByEndDateAfter(Date endDate);
+    Event findTopByStatAndEndDateAfter(String status,Date endDate);
 
 }

@@ -8,7 +8,15 @@ public class DashBoardDTO {
     private Long sermonCount;
     private Long eventCount;
     private Long nextEvent;
+    private Long departmentCount;
 
+    public Long getDepartmentCount() {
+        return departmentCount;
+    }
+
+    public void setDepartmentCount(Long departmentCount) {
+        this.departmentCount = departmentCount;
+    }
 
     public Long getSermonCount() {
         return sermonCount;

@@ -2,6 +2,7 @@ package com.codeinsyt.churchpressapi.services.impl;
 
 import com.codeinsyt.churchpressapi.dto.DashBoardDTO;
 import com.codeinsyt.churchpressapi.models.Event;
+import com.codeinsyt.churchpressapi.repositories.DepartmentRepository;
 import com.codeinsyt.churchpressapi.repositories.EventRepository;
 import com.codeinsyt.churchpressapi.repositories.SermonRepository;
 import com.codeinsyt.churchpressapi.services.interfaces.DashboardService;
@@ -19,12 +20,17 @@ public class DashboardServiceImpl implements DashboardService {
 
     private SermonRepository sermonRepository;
     private EventRepository eventRepository;
+    private DepartmentRepository departmentRepository;
+
 
     @Autowired
-    public DashboardServiceImpl(SermonRepository sermonRepository, EventRepository eventRepository) {
+    public DashboardServiceImpl(SermonRepository sermonRepository, EventRepository eventRepository, DepartmentRepository departmentRepository) {
         this.sermonRepository = sermonRepository;
         this.eventRepository = eventRepository;
+        this.departmentRepository = departmentRepository;
     }
+
+
 
 
     public HashMap<String, Object> responseAPI(Object data, String message, HttpStatus status){
@@ -50,9 +56,15 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
+    public Long countDepartments() {
+        final long count = departmentRepository.count();
+        return  count;
+    }
+
+    @Override
     public Long getNextEventTime() throws ParseException {
       //  SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Event event = this.eventRepository.findTopByEndDateAfter(new Date());
+        Event event = this.eventRepository.findTopByStatAndEndDateAfter("active",new Date());
 
 //        Date endDate = format.parse(event.getEndDate().toString());
         Date currentDate = new Date();
@@ -66,7 +78,7 @@ public class DashboardServiceImpl implements DashboardService {
 
         System.out.println(d1);
         System.out.println(d2);
-       Long diff = d1 -d2;
+       Long diff = d1 - d2;
 
 
 
@@ -84,6 +96,7 @@ public class DashboardServiceImpl implements DashboardService {
             dashBoardDTO.setEventCount(this.countEvents());
             dashBoardDTO.setSermonCount(this.countSermons());
             dashBoardDTO.setNextEvent(this.getNextEventTime());
+            dashBoardDTO.setDepartmentCount(this.countDepartments());
 
             return this.responseAPI(dashBoardDTO,"Dashboard data", HttpStatus.FOUND);
 
