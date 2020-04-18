@@ -11,6 +11,8 @@ public interface DashboardService {
 
     Long countDepartments();
 
+    HashMap<String, Object> getNextEvent();
+
     Long getNextEventTime() throws ParseException;
 
     HashMap<String, Object> getDashboardComponents();

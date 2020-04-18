@@ -60,6 +60,17 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
+    public HashMap<String, Object> getNextEvent() {
+        try{
+            return responseAPI(this.getNextEventTime(),"Found next event", HttpStatus.FOUND);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @Override
     public Long getNextEventTime()  {
         Event event = this.eventRepository.findTopByStatAndEndDateAfter("active",new Date());
 
@@ -73,7 +84,7 @@ public class DashboardServiceImpl implements DashboardService {
 
         System.out.println(d1);
         System.out.println(d2);
-       Long diff = d1 - d2;
+       Long diff = (d1 - d2)/1000;
 
 
 
@@ -90,7 +101,6 @@ public class DashboardServiceImpl implements DashboardService {
 
             dashBoardDTO.setEventCount(this.countEvents());
             dashBoardDTO.setSermonCount(this.countSermons());
-            dashBoardDTO.setNextEvent(this.getNextEventTime());
             dashBoardDTO.setDepartmentCount(this.countDepartments());
 
             return this.responseAPI(dashBoardDTO,"Dashboard data", HttpStatus.FOUND);
@@ -99,6 +109,7 @@ public class DashboardServiceImpl implements DashboardService {
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
         }
+
 
 
 

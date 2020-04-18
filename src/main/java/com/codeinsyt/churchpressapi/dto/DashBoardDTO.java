@@ -7,7 +7,6 @@ public class DashBoardDTO {
 
     private Long sermonCount;
     private Long eventCount;
-    private Long nextEvent;
     private Long departmentCount;
 
     public Long getDepartmentCount() {
@@ -34,11 +33,4 @@ public class DashBoardDTO {
         this.eventCount = eventCount;
     }
 
-    public Long getNextEvent() {
-        return nextEvent;
-    }
-
-    public void setNextEvent(Long nextEvent) {
-        this.nextEvent = nextEvent;
-    }
 }

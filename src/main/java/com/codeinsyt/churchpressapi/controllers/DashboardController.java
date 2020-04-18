@@ -23,4 +23,10 @@ public class DashboardController {
     public ResponseEntity<?> getDashboard(){
         return new ResponseEntity<>(this.dashboardService.getDashboardComponents(), HttpStatus.OK);
     }
+
+    @GetMapping("nextEvent")
+    public ResponseEntity<?> getNextEvent(){
+        System.out.println("Imn here");
+        return new ResponseEntity<>(this.dashboardService.getNextEvent(), HttpStatus.OK);
+    }
 }
