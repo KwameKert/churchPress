@@ -113,7 +113,7 @@ public class SermonServiceImpl implements SermonService {
             if(sermons.isEmpty()){
                 return responseAPI(null, "No sermon found",HttpStatus.NO_CONTENT);
             }
-            return responseAPI(sermons,"Sermons",HttpStatus.OK);
+            return responseAPI(sermons,"Sermons",HttpStatus.FOUND);
         }catch(Exception e){
             e.printStackTrace();
             return responseAPI(null,e.getMessage(),HttpStatus.EXPECTATION_FAILED);
